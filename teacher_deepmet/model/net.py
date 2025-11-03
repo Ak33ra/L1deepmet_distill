@@ -63,8 +63,8 @@ def loss_fn_weighted(weights, prediction, truth, batch, sample_weight=None):
     # print('batch:', batch)
     METx = scatter_add(weights*px, batch)
     METy = scatter_add(weights*py, batch)
-    print('METx:', METx.shape)
-    print('METy:', METy.shape)
+    # print('METx:', METx.shape)
+    # print('METy:', METy.shape)
     #tzero = torch.zeros(prediction.shape[0]).to('cuda')
     #BCE = nn.BCELoss()
     #prediction[:,]: pX,pY,pT,eta,d0,dz,mass,puppiWeight,pdgId,charge,fromPV
@@ -89,9 +89,9 @@ def loss_fn_weighted(weights, prediction, truth, batch, sample_weight=None):
             mask_uT = (true_uT > binnings[idx]) & (true_uT <= binnings[idx+1])
             sample_weight[mask_uT] = per_genMET_bin_weight[idx]            
 
-        print(sample_weight)
-        print(sample_weight.shape)
-        print(type(sample_weight))
+        # print(sample_weight)
+        # print(sample_weight.shape)
+        # print(type(sample_weight))
         # exit()
 
         loss=0.5*( ( ( METx + true_px)**2 + ( METy + true_py)**2 ) * sample_weight ).mean()
@@ -110,10 +110,10 @@ def loss_fn_response_tune(weights, prediction, truth, batch, c = 4000, scale_mom
     METx = scatter_add(weights*px, batch)
     METy = scatter_add(weights*py, batch)
     # predicted MET/qT
-    print('METx:', METx)
-    print('METy:', METy)
-    print('true_px:', true_px)
-    print('true_py:', true_py)
+  # print('METx:', METx)
+  # print('METy:', METy)
+  # print('true_px:', true_px)
+  # print('true_py:', true_py)
 
     v_true = torch.stack((true_px,true_py),dim=1)
     v_regressed = torch.stack((METx,METy),dim=1)
@@ -128,11 +128,11 @@ def loss_fn_response_tune(weights, prediction, truth, batch, c = 4000, scale_mom
     c = c #/ scale_momentum
 
     response_term = c * (torch.sum(1 - response[resp_neg]) + torch.sum(response[resp_pos] - 1))
-    print('response_term:', response_term)
-    print('resolution term:', loss)
+  # print('response_term:', response_term)
+  # print('resolution term:', loss)
 
     loss += response_term
-    print('total loss:', loss)
+  # print('total loss:', loss)
     return loss
 
 def loss_fn_response_binned(weights, prediction, truth, batch, c = 1000, scale_momentum = 128.):
@@ -187,7 +187,7 @@ def loss_fn_response_binned(weights, prediction, truth, batch, c = 1000, scale_m
     
     loss = 0.5*( (METx + true_px)**2 + (METy + true_py)**2 ).mean()
     loss += response_term
-    print('total loss:', loss)
+  # print('total loss:', loss)
     return loss
 
 def loss_fn(weights, prediction, truth, batch, scale_momentum = 128.):
@@ -237,9 +237,9 @@ def u_perp_par_loss(weights, prediction, truth, batch):
 def resolution(weights, prediction, truth, batch):
     
     def getdot(vx, vy):
-        print('shapes:', vx.shape, vy.shape)
-        print('vx:', vx)
-        print('vy:', vy)
+      # print('shapes:', vx.shape, vy.shape)
+      # print('vx:', vx)
+      # print('vy:', vy)
         return torch.einsum('bi,bi->b',vx,vy)
     def getscale(vx):
         return torch.sqrt(getdot(vx,vx))
@@ -249,18 +249,18 @@ def resolution(weights, prediction, truth, batch):
     qTx=truth[:,0]#*torch.cos(truth[:,1])
     qTy=truth[:,1]#*torch.sin(truth[:,1])
     # truth qT
-    print('qTx:', qTx.shape)
-    print('qTy:', qTy.shape)
+  # print('qTx:', qTx.shape)
+  # print('qTy:', qTy.shape)
     v_qT=torch.stack((qTx,qTy),dim=1)
-    print('v_qT:', v_qT.shape)
+  # print('v_qT:', v_qT.shape)
 
     pfMETx=truth[:,2]#*torch.cos(truth[:,3])
     pfMETy=truth[:,3]#*torch.sin(truth[:,3])
-    print('pfMETx:', pfMETx.shape)
-    print('pfMETy:', pfMETy.shape)
+  # print('pfMETx:', pfMETx.shape)
+  # print('pfMETy:', pfMETy.shape)
     # PF MET
     v_pfMET=torch.stack((pfMETx, pfMETy),dim=1)
-    print('v_pfMET:', v_pfMET.shape)
+  # print('v_pfMET:', v_pfMET.shape)
 
     puppiMETx=truth[:,4]#*torch.cos(truth[:,5])
     puppiMETy=truth[:,5]#*torch.sin(truth[:,5])

@@ -25,9 +25,9 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--restore_file', default=None,
                     help="Optional, name of the file in --model_dir containing weights to reload before \
                     training")  # 'best' or 'train'
-parser.add_argument('--data', default='/hildafs/projects/phy230010p/share/NanoAOD/data4L1/data_ttbar',
+parser.add_argument('--data', default='/L1deepmet_distill/data/data4L1/data_ttbar',
                     help="Name of the data folder")
-parser.add_argument('--ckpts', default='/hildafs/projects/phy230010p/share/NanoAOD/ckpts_znunu_Aug15_teacher',
+parser.add_argument('--ckpts', default='/L1deepmet_distill/teacher_ckptsL1',
                     help="Name of the ckpts folder")
 
 scale_momentum = 128

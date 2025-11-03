@@ -48,9 +48,9 @@ class GraphMETNetwork(nn.Module):
         self.pdgs = [1, 2, 11, 13, 22, 130, 211]
 
     def forward(self, x_cont, x_cat, edge_index, batch):
-        print("x_cont:",x_cont)
-        print("x_cat:",x_cat)
-        print("edge_index:",edge_index)
+      # print("x_cont:",x_cont)
+      # print("x_cat:",x_cat)
+      # print("edge_index:",edge_index)
         
         #scale momentum
         # x_cont *= self.datanorm

@@ -25,10 +25,11 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--restore_file', default=None,
                     help="Optional, name of the file in --model_dir containing weights to reload before \
                     training")  # 'best' or 'train'
-parser.add_argument('--data', default='/hildafs/projects/phy230010p/share/NanoAOD/Znunu/',
+parser.add_argument('--data', default='../data/data4L1/data_ttbar',
                     help="Name of the data folder")
-parser.add_argument('--ckpts', default='/hildafs/projects/phy230010p/andy_liu/fep/ckpts_znunu',
+parser.add_argument('--ckpts', default='../teacher_ckpts_L1',
                     help="Name of the ckpts folder")
+
 
 scale_momentum = 128
 
@@ -131,9 +132,9 @@ if __name__ == '__main__':
 
     for epoch in range(first_epoch+1, max_epochs+1):
 
-        print('Current best loss:', best_validation_loss)
-        if '_last_lr' in scheduler.state_dict():
-            print('Learning rate:', scheduler.state_dict()['_last_lr'][0])
+        # print('Current best loss:', best_validation_loss)
+        # if '_last_lr' in scheduler.state_dict():
+        #     print('Learning rate:', scheduler.state_dict()['_last_lr'][0])
 
         # compute number of batches in one epoch (one full pass over the training set)
         train_loss = train(model, device, optimizer, scheduler, loss_fn, train_dl, epoch)
