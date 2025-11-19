@@ -201,9 +201,9 @@ if __name__ == '__main__':
     # Define the model
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
-    norm = torch.tensor([1./scale_momentum, 1./scale_momentum, 1./scale_momentum, 1., 1., 1., 1., 1.]).to(device)   # pt, px, py: scale by 128
+    norm = torch.tensor([1./scale_momentum, 1./scale_momentum, 1./scale_momentum, 1., 1., 1.,]).to(device)   # pt, px, py: scale by 128
 
-    model = net.Net(8, 3, norm).to(device) #include puppi
+    model = net.Net(6, 2, norm).to(device) #include puppi
     #model = net.Net(7, 3).to(device) #remove puppi
     optimizer = torch.optim.AdamW(model.parameters(),lr=0.001, weight_decay=0.001)
     # scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(optimizer, factor=0.5, patience=500, threshold=0.05)

@@ -176,4 +176,3 @@ if __name__ == '__main__':
         utils.save(resolutions, osp.join(model_dir, 'last.resolutions'))
 
     loss_log.close()
-

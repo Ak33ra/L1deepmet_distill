@@ -6,10 +6,10 @@ import mplhep as hep
 plt.style.use(hep.style.CMS)
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--restore_file', default=None,
+parser.add_argument('--restore_file', default='best',
                     help="Optional, name of the file in --model_dir containing weights to reload before \
                     training")  # 'best' or 'train'
-parser.add_argument('--ckpts', default='ckpts',
+parser.add_argument('--ckpts', default='teacher_ckpts_L1',
                     help="Name of the ckpts folder")
 parser.add_argument('--comparison', default=None, help="Name of ckpts folder to compare with")
 

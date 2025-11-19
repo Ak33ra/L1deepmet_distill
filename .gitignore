@@ -1,3 +1,5 @@
-/data/*
+/data/data4L1/
 /teacher_ckpts_L1/*
+/teacher_deepmet/teacher_ckpts_L1/*
+/teacher_deepmet/student_ckpts_L1/*
 !.gitkeep
